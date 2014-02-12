@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" >
+	
+	<fx:Script>
+		<![CDATA[
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				this.currentState = 'cartView'; 
+			}
+			
+			protected function button2_clickHandler(event:MouseEvent):void
+			{
+				this.currentState = '';				
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:states>
+		<s:State name="State1"/>
+		<s:State name="cartView"/>
+	</s:states>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:controlBarLayout>
+		<s:BasicLayout/>		
+	</s:controlBarLayout>
+	
+	<s:controlBarContent>
+		<s:Button label="Flex Grocer" 
+				  x="5" y="5"/>
+		<s:Button label="View Cart"
+				  id="btnCartView" x="463" y="10"/>
+		<s:Button label="Checkout"
+				  id="btnCheckout"
+				  x="541"
+				  y="10"/>
+	</s:controlBarContent>
+	
+	<s:Label text="(c) 2011, FlexGrocer"
+			 x="500"
+			 y="546"/>
+	
+	<s:HGroup id="bodyGroup"
+			 x="0"
+			 y="0"
+			 width="100%"
+			 height="100%">
+		
+		<s:VGroup id="products"
+				 width="100%"
+				 height="150"
+				 visible.cartView="false"
+				 width.cartView="0"
+				 height.cartView="0">
+			
+			<s:Label text="Milk"
+					 id="prodName"/>
+			<s:Label text="$1.99"
+					 id="price"/>
+			<s:Button label="Add To Cart"
+					  id="add"/>
+		</s:VGroup>
+		<s:VGroup id="cartGroup"
+				 height="100%"
+				 width.cartView="100%">
+			
+			<s:Label text="Your Cart Total $0"/>
+			<s:Button label="View Cart"
+					  height="17"
+					  includeIn="State1"
+					  click="button1_clickHandler(event)"/>
+			
+			<s:DataGrid includeIn="cartView" requestedRowCount="4">
+				<s:columns>
+					<s:ArrayList>
+						<s:GridColumn dataField="dataField1"
+									  headerText="Column 1">
+						</s:GridColumn>
+						<s:GridColumn dataField="dataField2"
+									  headerText="Column 2">
+						</s:GridColumn>
+						<s:GridColumn dataField="dataField3"
+									  headerText="Column 3">
+						</s:GridColumn>
+					</s:ArrayList>
+				</s:columns>
+				<s:typicalItem>
+					<fx:Object dataField1="Sample Data"
+							   dataField2="Sample Data"
+							   dataField3="Sample Data">
+					</fx:Object>
+				</s:typicalItem>
+				<s:ArrayList>
+					<fx:Object dataField1="data1"
+							   dataField2="data1"
+							   dataField3="data1">
+					</fx:Object>
+					<fx:Object dataField1="data2"
+							   dataField2="data2"
+							   dataField3="data2">
+					</fx:Object>
+					<fx:Object dataField1="data3"
+							   dataField2="data3"
+							   dataField3="data3">
+					</fx:Object>
+					<fx:Object dataField1="data4"
+							   dataField2="data4"
+							   dataField3="data4">
+					</fx:Object>
+				</s:ArrayList>
+			</s:DataGrid>
+			<s:Button label="Continue Shopping"
+					  includeIn="cartView"
+					  click="button2_clickHandler(event)"/>
+		</s:VGroup>
+	</s:HGroup>
+	
+</s:Application>
